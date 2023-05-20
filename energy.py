@@ -2,7 +2,7 @@ import numpy as np
 from PIL import Image
 import cv2
 
-watermark = cv2.imread('watermark2.png', cv2.IMREAD_GRAYSCALE)
+watermark = cv2.imread('Lenna.png', cv2.IMREAD_GRAYSCALE)
 
 # 转换为NumPy数组
 watermark_array = np.array(watermark)

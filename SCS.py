@@ -16,7 +16,7 @@ def embed(host, wm, key, quan_step, alpha):
 def decode(received, key, quan_step):
     return quantization(received - quan_step * key, quan_step) + key * quan_step - received
 
-wm = cv2.imread("watermark2.png",cv2.IMREAD_GRAYSCALE)
+wm = cv2.imread("testwm.png",cv2.IMREAD_GRAYSCALE)
 im = cv2.imread("Lenna.png",cv2.IMREAD_GRAYSCALE)
 shape = im.shape
 quan_step = 50
@@ -25,8 +25,8 @@ key = np.random.rand(*shape)
 
 
 im_wm = embed(im, wm, key, quan_step, alpha)
-mean = 100
-std_dev = 100
+mean = 5
+std_dev = 5
 distorted_im = im_wm + np.random.normal(mean, std_dev, size=shape)
 wm_ex = decode(distorted_im, key, quan_step)
 
@@ -52,8 +52,8 @@ with open('./output/SCS.txt', 'w') as f:
         line = [str(i) for i in line]
         return ' '.join(line) + '\n'
     f.writelines([to_str(line) for line in wm_ex])
-plt.savefig('./output/scs_4.png')
-plt.show()
-# cv2.imshow('image', wm_ex)
-cv2.imwrite('./output/scs_2much.png', 255*wm_ex)
-# cv2.waitKey()
+# plt.savefig('./output/scs_4.png')
+# plt.show()
+cv2.imshow('image', wm_ex)
+cv2.imwrite('./output/scs_testwm.png', 255*wm_ex)
+cv2.waitKey()
